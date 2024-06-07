@@ -17,7 +17,6 @@ class TestGetUsersOrders:
     @allure.title("Проверка ошибки получения списка заказов не авторизованного пользователя")
     @allure.description("Получение списка заказов конкретного пользователя, проверка статуса и тела ответа")
     def test_success_get_users_orders(self, create_user, get_token_create_user, auth_token_clean_created_user):
-        create_order_response = burgers_api.BurgersApi.create_order(get_token_create_user,
-                                                                    data.DataCreateOrder.CREATE_ORDER_BODY)
+        create_order_response = burgers_api.BurgersApi.create_order(get_token_create_user, data.DataCreateOrder.CREATE_ORDER_BODY)
         get_users_orders_response = burgers_api.BurgersApi.get_users_orders(get_token_create_user)
         assert get_users_orders_response.status_code == 401 and get_users_orders_response.json()["success"] == False
